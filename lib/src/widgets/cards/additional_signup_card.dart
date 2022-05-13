@@ -52,6 +52,7 @@ class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard>
   void initState() {
     super.initState();
 
+
     _nameControllers =
         HashMap<String, TextEditingController>.fromIterable(widget.formFields,
             key: (formFields) => formFields.keyName,
@@ -154,33 +155,57 @@ class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard>
   Widget _buildFields(double width) {
     return Column(
         children: widget.formFields.map((UserFormField formField) {
-      return Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          AnimatedTextFormField(
-            controller: _nameControllers[formField.keyName],
-            // interval: _fieldAnimationIntervals[widget.formFields.indexOf(formField)],
-            loadingController: widget.loadingController,
-            width: width,
-            labelText: formField.displayName,
-            prefixIcon:
-                formField.icon ?? const Icon(FontAwesomeIcons.solidCircleUser),
-            keyboardType: TextFieldUtils.getKeyboardType(formField.userType),
-            autofillHints: [
-              TextFieldUtils.getAutofillHints(formField.userType)
-            ],
-            textInputAction: formField.keyName == widget.formFields.last.keyName
-                ? TextInputAction.done
-                : TextInputAction.next,
-            validator: formField.fieldValidator,
-          ),
-          const SizedBox(
-            height: 5,
-          )
-        ],
-      );
+
+          Widget? formFieldWidget;
+
+          if (formField is TextUserFormField) {
+            formFieldWidget = Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                AnimatedTextFormField(
+                  controller: _nameControllers[formField.keyName],
+                  // interval: _fieldAnimationIntervals[widget.formFields.indexOf(formField)],
+                  loadingController: widget.loadingController,
+                  width: width,
+                  labelText: formField.displayName,
+                  prefixIcon:
+                  formField.icon ?? const Icon(FontAwesomeIcons.solidCircleUser),
+                  keyboardType: TextFieldUtils.getKeyboardType(formField.userType),
+                  autofillHints: [
+                    TextFieldUtils.getAutofillHints(formField.userType)
+                  ],
+                  textInputAction: formField.keyName == widget.formFields.last.keyName
+                      ? TextInputAction.done
+                      : TextInputAction.next,
+                  validator: formField.fieldValidator,
+                ),
+                const SizedBox(
+                  height: 5,
+                )
+              ],
+            );
+          } else if (formField is RadioUserFormField) {
+            formFieldWidget = Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                RadioFormField(
+                  controller: _nameControllers[formField.keyName],
+                  formField: formField,
+                ),
+                const SizedBox(
+                  height: 5,
+                )
+              ],
+            );
+          } else {
+            formFieldWidget = SizedBox(height: 10,);
+          }
+
+          return formFieldWidget;
     }).toList());
   }
 

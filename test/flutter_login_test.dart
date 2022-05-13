@@ -653,12 +653,12 @@ void main() {
           userValidator: mockCallback.userValidator,
           passwordValidator: mockCallback.passwordValidator,
           onSubmitAnimationCompleted: mockCallback.onSubmitAnimationCompleted,
-          additionalSignupFields: <UserFormField>[
-            UserFormField(
+          additionalSignupFields: <TextUserFormField>[
+            TextUserFormField(
               keyName: 'Name',
               fieldValidator: mockCallback.userValidator,
             ),
-            UserFormField(
+            TextUserFormField(
               keyName: 'Surname',
               fieldValidator: mockCallback.userValidator,
             ),
@@ -1025,8 +1025,8 @@ void main() {
           onRecoverPassword: (data) => null,
           passwordValidator: (value) => null,
           additionalSignupFields: const [
-            UserFormField(keyName: 'Name'),
-            UserFormField(keyName: 'Surname'),
+            TextUserFormField(keyName: 'Name'),
+            TextUserFormField(keyName: 'Surname'),
           ],
         ));
     await tester.pumpWidget(loginBuilder());
@@ -1075,8 +1075,8 @@ void main() {
           onRecoverPassword: (data) => null,
           passwordValidator: (value) => null,
           additionalSignupFields: const [
-            UserFormField(keyName: 'Name'),
-            UserFormField(keyName: 'Surname'),
+            TextUserFormField(keyName: 'Name'),
+            TextUserFormField(keyName: 'Surname'),
           ],
         ));
 
@@ -1119,8 +1119,8 @@ void main() {
           onRecoverPassword: (data) => null,
           passwordValidator: (value) => null,
           additionalSignupFields: const [
-            UserFormField(keyName: 'Name'),
-            UserFormField(keyName: 'Surname'),
+            TextUserFormField(keyName: 'Name'),
+            TextUserFormField(keyName: 'Surname'),
           ],
           onSubmitAnimationCompleted: () =>
               onSubmitAnimationCompletedExecuted = true,

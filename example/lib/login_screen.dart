@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
       navigateBackAfterRecovery: true,
       onConfirmRecover: _signupConfirm,
       onConfirmSignup: _signupConfirm,
-      loginAfterSignUp: false,
+      loginAfterSignUp: true,
       loginProviders: [
         LoginProvider(
           button: Buttons.linkedIn,
@@ -100,11 +100,16 @@ class LoginScreen extends StatelessWidget {
             linkUrl: 'https://github.com/NearHuscarl/flutter_login'),
       ],
       additionalSignupFields: [
-        const UserFormField(
+        const TextUserFormField(
             keyName: 'Username', icon: Icon(FontAwesomeIcons.userLarge)),
-        const UserFormField(keyName: 'Name'),
-        const UserFormField(keyName: 'Surname'),
-        UserFormField(
+        const TextUserFormField(keyName: 'Name'),
+        const TextUserFormField(keyName: 'Surname'),
+        const RadioUserFormField(
+            keyName: 'gender',
+            defaultValue: 'female',
+            names: ['male', 'female'],
+        ),
+        TextUserFormField(
           keyName: 'phone_number',
           displayName: 'Phone Number',
           userType: LoginUserType.phone,
